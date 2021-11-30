@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} All programs in the category "{{ category.name }}" {% endblock %}
+
+{% block body %}
+   <h1>All programs in the category "{{ category.name }}" </h1>
+  
+       {% for program in categoryContent %}
+    <div>
+    <ul>
+    <li>{{ program.id }} 
+    <img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
+    {{ program.summary }}
+    </li>
+    </ul>
+    </div> 
+
+    {% else %}
+        Aucune série trouvée.
+    {% endfor %}
+
+    <a href="{{ path('app_index') }}">
+        Retour à l'accueil
+    </a>
+{% endblock %}

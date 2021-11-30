@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}All categories{% endblock %}
+
+{% block body %}
+<pre>
+    {{ dump(categoryList) }}
+</pre>
+   <h1>Toutes les catégories de Wild Séries:</h1>
+       
+<div>
+    <ul>
+        {% for category in categoryList %}
+        <a href="{{ path('category_show', {'categoryName': category.name}) }}">        
+            <li>{{ category.name }}</li>
+        </a>
+        {% endfor %}
+    </ul>
+</div>
+<a href="{{ path('app_index') }}">
+    Retour à l'accueil
+</a>
+{% endblock %}
