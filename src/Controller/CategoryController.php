@@ -42,7 +42,7 @@ class CategoryController extends AbstractController
             return $this->render('/404.html.twig');
         } 
 
-        $categoryContent = $this->getDoctrine()->getRepository(Program::class)->findBy(['category' => $category], ['id' => 'DESC']);
+        $categoryContent = $this->getDoctrine()->getRepository(Program::class)->findBy(['category' => $category], ['id' => 'DESC'], 3);
         return $this->render('category/show.html.twig', ['categoryContent' => $categoryContent, 'category' => $category]);
     }
 }
