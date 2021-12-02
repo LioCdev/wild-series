@@ -43,8 +43,7 @@ class ProgramController extends AbstractController
                 'No program with id : '.$id.' found in program\'s table.'
             );
         }
-        // var_dump($seasons);
-        // dd($program);
+
         return $this->render('program/show.html.twig', ['program' => $program, 'seasons' => $seasons]);
     }
 
@@ -63,7 +62,7 @@ class ProgramController extends AbstractController
                 'No season with id : '.$seasonId.' found in season\'s table.'
             );
         }
-        // dd($seasons);
+
         return $this->render('seasons/season.html.twig', ['seasons' => $seasons]);
     }
 
