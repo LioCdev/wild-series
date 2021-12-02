@@ -2,5 +2,10 @@
 @import "~bootstrap/scss/bootstrap";
 
 body {
-    background-color: $primary;
+    background-color: $dark;
+    color: $white;
+}
+
+h1 {
+    color: $white;
 }
