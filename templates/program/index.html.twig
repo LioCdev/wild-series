@@ -3,11 +3,11 @@
 {% block title %}All programs{% endblock %}
 
 {% block body %}
-   <h1>Toutes les séries de {{ website }}</h1>
+   <h1>Toutes les séries de Wild Séries</h1>
        {% for program in programs %}
         <div>
             <h2>{{ loop.index }} / {{ program.title }} - Catégorie : {{ program.category.name }}</h2>
-            <p>{{ program.summary }}</p>
+            <p>{{ program.synopsis }}</p>
             <a href="{{ path("program_show", { id: program.id }) }}">Voir la fiche</a>
         </div>
     {% else %}
@@ -17,7 +17,4 @@
     <a href="{{ path('app_index') }}">
         Retour à l'accueil
     </a>
-   {# <a href="{{ path('program_show', {id}) }}"> #}
-      {# <img src="{{ asset('build/images/pulp-fiction.jpg') }}" id='2' alt="pulp_fiction"/> #}
-   {# </a> #}
 {% endblock %}
