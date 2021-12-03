@@ -2,6 +2,7 @@
 // src/Controller/ProgramController.php
 namespace App\Controller;
 
+use App\Entity\Episode;
 use App\Entity\Program;
 use App\Entity\Season;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -57,13 +58,17 @@ class ProgramController extends AbstractController
         ->getRepository(Season::class)
         ->findOneBy(['program' => $programId, 'id' => $seasonId]);
 
+        $episodes = $this->getDoctrine()
+        ->getRepository(Episode::class)
+        ->findBy(['season' => $seasonId]);
+
         if (!$seasons) {
             throw $this->createNotFoundException(
                 'No season with id : '.$seasonId.' found in season\'s table.'
             );
         }
 
-        return $this->render('seasons/season.html.twig', ['seasons' => $seasons]);
+        return $this->render('seasons/season.html.twig', ['seasons' => $seasons, 'episodes' => $episodes]);
     }
 
 }
