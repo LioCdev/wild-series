@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Episode;
 use App\Entity\Program;
 use App\Entity\Season;
+use App\Form\ProgramType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -78,5 +80,26 @@ class ProgramController extends AbstractController
     public function showEpisode(Program $programId, Season $seasonId, Episode $episodeId): Response
     {
         return $this->render('program/episode_show.html.twig', ['program' => $programId, 'seasons' => $seasonId, 'episodes' => $episodeId]);
+    }
+
+    /**
+     * @route("/new", name = "new")
+     * @return Response
+     */
+    public function new(Request $request): Response
+    {
+        $program = new Program();
+        $form = $this->createForm(ProgramType::class, $program);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($program);
+            $entityManager->flush();
+            return $this->redirectToRoute('program_index');
+        }
+        return $this->render('program/new.html.twig', [
+            "form" => $form->createView(),
+        ]);
     }
 }
